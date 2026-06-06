@@ -8,7 +8,8 @@ on:
 
 jobs:
   android-tests:
-    runs-on: ubuntu-latest # Emülatörün hızlı çalışması için linux sunucusu seçiyoruz
+    # 1. Burayı tekrar macos yapıyoruz (Emülatörün sorunsuz açılması için)
+    runs-on: macos-13
 
     steps:
       - name: Checkout Code
@@ -25,9 +26,10 @@ jobs:
         with:
           node-version: '18'
 
+      # 2. Burayı appium@latest olarak güncelliyoruz (Sürüm hatasını çözmek için)
       - name: Install Appium Server & Drivers
         run: |
-          npm install -g appium
+          npm install -g appium@latest
           appium driver install uiautomator2
 
       - name: Run Appium Tests on Android Emulator
