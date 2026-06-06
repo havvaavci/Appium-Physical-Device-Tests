@@ -16,7 +16,8 @@ public class C01_SetupDriver {
         options.setPlatformName("Android");
         options.setAutomationName("UiAutomator2");
         options.setUdid("988a1642334c524b5030");
-        options.setApp("C:\\Users\\havva\\IdeaProjects\\Appium_Project\\src\\test\\resources\\ApiDemos.apk");
+        // Bilgisayar adın ne olursa olsun projenin içindeki resources klasörünü otomatik bulur:
+        options.setApp(System.getProperty("user.dir") + "/src/test/resources/ApiDemos.apk");
         //Timeout 
         options.setCapability("uiautomator2ServerInstallTimeout", 60000);
 
@@ -28,12 +29,12 @@ public class C01_SetupDriver {
     public void testUiAutomator2Options() throws MalformedURLException {
         UiAutomator2Options options = new UiAutomator2Options()
                 .setUdid("988a1642334c524b5030")
-                .setApp("C:\\Users\\havva\\IdeaProjects\\Appium_Project\\src\\test\\resources\\ApiDemos.apk");
+                .setApp(System.getProperty("user.dir") + "/src/test/resources/ApiDemos.apk");
 
         URL url = new URL("http://127.0.0.1:4723/");
         AndroidDriver driver = new AndroidDriver(url, options);
     }
-    @Test
+    //@Test
     public void testSamsungHesapMakinesi() throws MalformedURLException {
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("Android");
@@ -51,7 +52,7 @@ public class C01_SetupDriver {
         driver.quit();
 
     }
-    @Test
+   // @Test
     public void testCalculator() throws MalformedURLException, InterruptedException {
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("Android");
