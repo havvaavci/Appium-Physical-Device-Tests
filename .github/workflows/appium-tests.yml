@@ -8,7 +8,7 @@ on:
 
 jobs:
   android-tests:
-    runs-on: macos-13 # Emülatörün hızlı çalışması için macOS sunucusu seçiyoruz
+    runs-on: ubuntu-latest # Emülatörün hızlı çalışması için linux sunucusu seçiyoruz
 
     steps:
       - name: Checkout Code
