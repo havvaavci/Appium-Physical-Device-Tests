@@ -36,6 +36,7 @@ public class C01_SetupDriver {
 
         URL url = new URL("http://127.0.0.1:4723/");
         AndroidDriver driver = new AndroidDriver(url, options);
+        driver.quit();
     }
     //@Test
     public void testSamsungHesapMakinesi() throws MalformedURLException {
