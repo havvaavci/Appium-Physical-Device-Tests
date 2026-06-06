@@ -9,7 +9,7 @@ on:
 jobs:
   android-tests:
     # 1. Burayı tekrar macos yapıyoruz (Emülatörün sorunsuz açılması için)
-    runs-on: macos-13
+    runs-on: macos-latest
 
     steps:
       - name: Checkout Code
