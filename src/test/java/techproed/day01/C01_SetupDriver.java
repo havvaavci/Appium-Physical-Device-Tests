@@ -11,20 +11,23 @@ public class C01_SetupDriver {
 
     @Test
     public void testDesiredCapabilities() throws MalformedURLException {
-        // DesiredCapabilities yerine UiAutomator2Options kullan
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("Android");
         options.setAutomationName("UiAutomator2");
-        options.setUdid("988a1642334c524b5030");
-        // Bilgisayar adın ne olursa olsun projenin içindeki resources klasörünü otomatik bulur:
+
+        // UDID varsa kullan, yoksa boş bırak (emülatör otomatik bulunur)
+        String udid = System.getProperty("udid");
+        if (udid != null && !udid.isEmpty()) {
+            options.setUdid(udid);
+        }
+
         options.setApp(System.getProperty("user.dir") + "/src/test/resources/ApiDemos.apk");
-        //Timeout 
         options.setCapability("uiautomator2ServerInstallTimeout", 60000);
 
         URL url = new URL("http://127.0.0.1:4723/");
         AndroidDriver driver = new AndroidDriver(url, options);
+        driver.quit();
     }
-
     @Test
     public void testUiAutomator2Options() throws MalformedURLException {
         UiAutomator2Options options = new UiAutomator2Options()

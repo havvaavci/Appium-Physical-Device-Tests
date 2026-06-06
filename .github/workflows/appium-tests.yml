@@ -8,7 +8,6 @@ on:
 
 jobs:
   android-tests:
-    # 1. Burayı tekrar macos yapıyoruz (Emülatörün sorunsuz açılması için)
     runs-on: macos-latest
 
     steps:
@@ -21,21 +20,23 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Install Node.js & Appium
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
-      # 2. Burayı appium@latest olarak güncelliyoruz (Sürüm hatasını çözmek için)
       - name: Install Appium Server & Drivers
         run: |
           npm install -g appium@latest
           appium driver install uiautomator2
 
-      - name: Run Appium Tests on Android Emulator
+      - name: Run Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 33
           target: google_apis
           arch: x86_64
-          script: mvn test
+          script: |
+            appium &
+            sleep 5
+            mvn test
