@@ -13,10 +13,10 @@ public class C01_SetupDriver {
     public void testDesiredCapabilities() throws MalformedURLException {
         // DesiredCapabilities yerine UiAutomator2Options kullan
         UiAutomator2Options options = new UiAutomator2Options();
-        options.setPlatformName("Android");
-        options.setAutomationName("UiAutomator2");
-        options.setUdid("988a1642334c524b5030");
-        options.setApp("C:\\Users\\havva\\IdeaProjects\\Appium_Project\\src\\test\\resources\\ApiDemos.apk");
+        options.setPlatformName("Android");//zorunlu
+        options.setAutomationName("UiAutomator2");//zorunlu
+        options.setUdid("R9WT3072EFX");//duruma gore degisir birden fazla cihaz varsa zorunlu
+        options.setApp("C:\\Users\\havva\\IdeaProjects\\Appium_Project\\src\\test\\resources\\ApiDemos.apk");//zorunlu
         // Timeout'u 60 saniyeye çıkar
         options.setCapability("uiautomator2ServerInstallTimeout", 60000);
 
@@ -28,8 +28,9 @@ public class C01_SetupDriver {
     @Test
     public void testUiAutomator2Options() throws MalformedURLException {
         UiAutomator2Options options = new UiAutomator2Options()
-                .setUdid("988a1642334c524b5030")
-                .setApp("C:\\Users\\havva\\IdeaProjects\\Appium_Project\\src\\test\\resources\\ApiDemos.apk");
+                .setApp("C:\\Users\\havva\\IdeaProjects\\Appium_Project\\src\\test\\resources\\ApiDemos.apk")
+                .setUdid("R9WT3072EFX")
+                ;
 
         URL url = new URL("http://127.0.0.1:4723/");
         AndroidDriver driver = new AndroidDriver(url, options);
@@ -41,7 +42,7 @@ public class C01_SetupDriver {
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("Android");
         options.setAutomationName("UiAutomator2");
-        options.setUdid("988a1642334c524b5030");
+        options.setUdid("R9WT3072EFX");
         // Samsung Hesap Makinesi bilgileri
         options.setCapability("appPackage", "com.sec.android.app.popupcalculator");
         // CMD ekranında eğik çizgiden sonra ne yazıyorsa aynen buraya yapıştır:
@@ -59,7 +60,7 @@ public class C01_SetupDriver {
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("Android");
         options.setAutomationName("UiAutomator2");
-        options.setUdid("988a1642334c524b5030");
+        options.setUdid("R9WT3072EFX");
         options.setAppPackage("com.samsung.android.calculator");   // kendi package'ını yaz
         options.setAppActivity("com.samsung.android.calculator.Calculator"); // kendi activity'ni yaz
 
