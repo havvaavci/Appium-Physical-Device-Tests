@@ -9,26 +9,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 import org.testng.Assert;
+import techproed.basetest.CalculatorBaseTest;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class C02_CalculatorFunctionalTest {
+public class C02_CalculatorFunctionalTest extends CalculatorBaseTest {
 
     @Test
     public void testCalculatorAddition() throws MalformedURLException {
-        // Samsung Hesap Makinesi için UiAutomator2Options oluştur
-        UiAutomator2Options options = new UiAutomator2Options();
-        options.setPlatformName("Android");
-        options.setAutomationName("UiAutomator2");
-        options.setUdid("988a1642334c524b5030");
-        options.setAppPackage("com.sec.android.app.popupcalculator");
-        options.setAppActivity("com.sec.android.app.popupcalculator.Calculator");
-        options.setCapability("uiautomator2ServerInstallTimeout", 60000);
 
-        URL url = new URL("http://127.0.0.1:4723/");
-        AndroidDriver driver = new AndroidDriver(url, options);
 
         // WebDriverWait oluştur (Explicit Wait) - 15 saniye esnek wait
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -36,14 +27,11 @@ public class C02_CalculatorFunctionalTest {
         // Samsung Hesap Makinesi açıldıktan sonra ilk buton (2) bekle ve görünür olmasını kontrol et
         WebElement button2 = wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.accessibilityId("2")));
 
-        // 25 işlemini yap: 2 butonuna tıkla
-        WebElement button2_for_25 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("2")));
-        button2_for_25.click();
+        button2.click();
 
         // 5 butonuna tıkla
         WebElement button5 = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("5")));
         button5.click();
-
         // + butonuna tıkla
         WebElement buttonPlus = wait.until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("+")));
         buttonPlus.click();
