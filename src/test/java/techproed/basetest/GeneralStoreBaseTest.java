@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class ApiDemosBaseTest {
+public class GeneralStoreBaseTest {
    protected AndroidDriver driver;
     @BeforeClass
     public void setup() throws MalformedURLException {
@@ -18,8 +18,8 @@ public class ApiDemosBaseTest {
                 + File.separator + "src"
                 + File.separator + "test"
                 + File.separator + "resources"
-                + File.separator + "ApiDemos.apk";
-
+                + File.separator + "General-Store.apk";
+//C:\Users\havva\IdeaProjects\Appium_Project\src\test\resources\General-Store.apk
         UiAutomator2Options options = new UiAutomator2Options()
                 .setApp(appUrl);
 
