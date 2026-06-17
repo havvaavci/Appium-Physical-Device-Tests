@@ -1,23 +1,28 @@
 package techproed.utilities;
 
 import com.google.common.collect.ImmutableMap;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
-import org.testng.annotations.Test;
 
 public class ReusableMethods {
+
+    public  void duration(int second){
+        try {
+            Thread.sleep(1000);
+        }catch (InterruptedException e){
+            System.out.println("Bekleme yapilamadi" );
+            throw new RuntimeException(e);
+        }
+    }
+
+    // 1. CLICK GESTURES
     public void clickGesture(AndroidDriver driver, WebElement element) {
-        // Java
-        // Java
         driver.executeScript("mobile: clickGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId()
         ));
     }
 
-    @Test
     public void clickGestureCoordinate(AndroidDriver driver, int x, int y) {
         driver.executeScript("mobile: clickGesture", ImmutableMap.of(
                 "x", x,
@@ -25,94 +30,95 @@ public class ReusableMethods {
         ));
     }
 
+    // 2. DOUBLE CLICK GESTURES (Hatalı script ismi düzeltildi)
     public void doubleClickGesture(AndroidDriver driver, WebElement element) {
-        // Java
-        // Java
-        driver.executeScript("mobile: clickGesture", ImmutableMap.of(
+        driver.executeScript("mobile: doubleClickGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId()
         ));
     }
 
-    @Test
     public void doubleClickGestureCoordinate(AndroidDriver driver, int x, int y) {
-        driver.executeScript("mobile: clickGesture", ImmutableMap.of(
+        driver.executeScript("mobile: doubleClickGesture", ImmutableMap.of(
                 "x", x,
                 "y", y
         ));
     }
 
+    // 3. LONG CLICK GESTURES (Sabit 1000 ms değeri dinamik yapıldı)
     public void longClickGestureElement(AndroidDriver driver, WebElement element, int milisecond) {
-
         driver.executeScript("mobile: longClickGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
-                "duration", 1000 // 1 saniye basılı tut
+                "duration", milisecond
         ));
     }
 
-    public void longClickGestureElementCoordinate(AndroidDriver driver, int x, int y) {
+    public void longClickGestureElementCoordinate(AndroidDriver driver, int x, int y, int milisecond) {
         driver.executeScript("mobile: longClickGesture", ImmutableMap.of(
                 "x", x,
-                "y", y
+                "y", y,
+                "duration", milisecond
         ));
-
     }
 
-    @Test
+    // 4. DRAG GESTURES (Sabit koordinatlar gelen parametrelere bağlandı)
     public void dragGesture(AndroidDriver driver, WebElement element, int endX, int endY) {
-
-
         driver.executeScript("mobile: dragGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
-                "endX", 665,  // Bırakılacak X koordinatı
-                "endY", 576// Bırakılacak Y koordinatı
-
+                "endX", endX,
+                "endY", endY
         ));
-
     }
 
     public void dragGestureCoordinate(AndroidDriver driver, int startX, int startY, int endX, int endY) {
-
         driver.executeScript("mobile: dragGesture", ImmutableMap.of(
-                "startX", 220,
-                "startY", 587,
-                "endX", 665,  // Bırakılacak X koordinatı
-                "endY", 576// Bırakılacak Y koordinatı
-
+                "startX", startX,
+                "startY", startY,
+                "endX", endX,
+                "endY", endY
         ));
-
     }
 
-    public void scrollGestureElement(AndroidDriver driver, WebElement element, String direction, double percent) {
-
-        // Java
+    // 5. SCROLL GESTURE
+    public void scrollGestureElement(AndroidDriver driver, WebElement element, String direction, double percent,int speed) {
         driver.executeScript("mobile: scrollGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
                 "direction", direction,
-                "percent", percent
-                //scrollun yavasligini kontrol ediyoruz yani yavas yavas yapiliyor gorebilmek icin yaptik
+                "percent", percent,
+                "speed",speed
         ));
-
     }
-    public void swipeGestureElement(AndroidDriver driver, WebElement element, String direction, double percent, int speed) {
 
+    // 6. SWIPE GESTURES ( Element ve Koordinat Tabanlı Swipe Metotları)
+    public void swipeGestureElement(AndroidDriver driver, WebElement element, String direction, double percent, int speed) {
         driver.executeScript("mobile: swipeGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
-                "direction", direction, // "right", "left", "up", "down" değerlerini alabilir
-                "percent", percent,     // 0.0 ile 1.0 arasında bir oran
-                "speed", speed          // Kaydırma hızı
+                "direction", direction, // "right", "left", "up", "down"
+                "percent", percent,     // 0.0 ile 1.0 arası
+                "speed", speed          // Kaydırma hızı (Örn: 1000)
         ));
-
     }
-    public void pinchOpenGestureElement(AndroidDriver driver, WebElement element, double percent) {
 
+    public void swipeGestureCoordinate(AndroidDriver driver, int left, int top, int width, int height, String direction, double percent, int speed) {
+        driver.executeScript("mobile: swipeGesture", ImmutableMap.of(
+                "left", left,
+                "top", top,
+                "width", width,
+                "height", height,
+                "direction", direction,
+                "percent", percent,
+                "speed", speed
+        ));
+    }
+
+    // 7. PINCH GESTURES (OPEN/CLOSE)
+    public void pinchOpenGestureElement(AndroidDriver driver, WebElement element, double percent) {
         driver.executeScript("mobile: pinchOpenGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
-                "percent", percent // Örn: 0.75
+                "percent", percent
         ));
-
     }
-    public void pinchOpenGestureCoordinate(AndroidDriver driver, int left, int top, int width, int height, double percent, int speed) {
 
+    public void pinchOpenGestureCoordinate(AndroidDriver driver, int left, int top, int width, int height, double percent, int speed) {
         driver.executeScript("mobile: pinchOpenGesture", ImmutableMap.of(
                 "left", left,
                 "top", top,
@@ -121,28 +127,23 @@ public class ReusableMethods {
                 "percent", percent,
                 "speed", speed
         ));
-
     }
-    public void pinchCloseGestureElement(AndroidDriver driver, WebElement element, double percent) {
 
+    public void pinchCloseGestureElement(AndroidDriver driver, WebElement element, double percent) {
         driver.executeScript("mobile: pinchCloseGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
-                "percent", percent // Örn: 0.75
+                "percent", percent
         ));
-
     }
-    public void pinchCloseGestureCoordinate(AndroidDriver driver, int left, int top, int width, int height, double percent, int speed) {
 
+    public void pinchCloseGestureCoordinate(AndroidDriver driver, int left, int top, int width, int height, double percent, int speed) {
         driver.executeScript("mobile: pinchCloseGesture", ImmutableMap.of(
                 "left", left,
                 "top", top,
                 "width", width,
                 "height", height,
                 "percent", percent,
-                "speed", speed // Parmakların kapanma hızı
+                "speed", speed
         ));
-
     }
-
-
 }

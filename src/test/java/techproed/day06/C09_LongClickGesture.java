@@ -32,7 +32,7 @@ public class C09_LongClickGesture extends ApiDemosBaseTest {
            //     "x", 531,
              //   "y",437
         //));
-        longClickGestureElementCoordinate(driver,531,467);
+        longClickGestureElementCoordinate(driver,531,467,5000);
 
         //uzun basinca cikan menuden secim yapma
         driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Menu A\")")).click();
